@@ -207,8 +207,12 @@ export default function LiveBank({ bank, switchUrl, openDemo }) {
 
   return <div className="layout live-bank-layout">
     <aside className="sidebar"><div className="brand"><span className="brand-icon"><Landmark size={23} /></span>
-      <span><strong>{bank.wordmark}</strong><small>BANKING PORTAL</small></span></div>
+      <span><strong>{bank.wordmark}</strong><small>PERSONAL BANKING</small></span></div>
+      <div className="sidebar-caption">YOUR WORKSPACE</div>
       <nav aria-label="Bank actions">
+        {session && <a className="sidebar-nav-link" href="#accounts"><Landmark size={18} /> My accounts</a>}
+        {session && <a className="sidebar-nav-link" href="#send-money"><Send size={18} /> Send money</a>}
+        {session && <a className="sidebar-nav-link" href="#activity"><List size={18} /> Transactions</a>}
         {session && <button onClick={() => refresh()}><RefreshCw size={18} /> Refresh balances</button>}
         {!configuredEndpoint && <button onClick={() => { setUrl(base); setEditUrl(!editUrl); }}><Globe2 size={18} /> Worker connection</button>}
         {openDemo && <button onClick={openDemo}><ArrowLeftRight size={18} /> Browser demo</button>}
@@ -217,10 +221,11 @@ export default function LiveBank({ bank, switchUrl, openDemo }) {
       <a className="switch-link" href={switchUrl}><Globe2 size={17} /> SharedBank switch</a>
     </aside>
     <div className="main">
-      <header className="topbar"><strong>{bank.name} · {bank.id}</strong><Chip label="Firestore test network" size="small" className="demo" /></header>
+      <header className="topbar"><div className="topbar-bank"><span className="topbar-mark"><Landmark size={17} /></span><div><strong>{bank.name}</strong><small>Secure digital banking</small></div></div><Chip label="TEST NETWORK" size="small" className="demo" /></header>
       <main className="content live-bank-content">
-        <div className="page-head"><div><h1>{session ? 'Accounts and transfers' : 'Access your bank'}</h1>
-          <p>{session ? 'Signed in as ' + session.email : 'Connect to the Worker and use your bank’s Firebase test login.'}</p>
+        <div className="page-head"><div><span className="eyebrow">{session ? 'OVERVIEW' : 'WELCOME TO ' + bank.name.toUpperCase()}</span><h1>{session ? 'Good to see you' : 'Banking, made simpler.'}</h1>
+          <p>{session ? 'Here is your account overview and recent activity.' : 'Sign in securely to manage your accounts and transfers.'}</p>
+          {session && <div className="signed-in-line"><span className="online-dot" /> Signed in as <strong>{session.email}</strong></div>}
         </div></div>
         {error && <Alert severity="error">{error}</Alert>}
         {note && <Alert severity="info" onClose={() => setNote('')}>{note}</Alert>}
@@ -239,14 +244,24 @@ export default function LiveBank({ bank, switchUrl, openDemo }) {
         {session && <>
           {loaded && !data.accounts.length && <Alert severity="info">This Firebase user has no synthetic account in this bank. Attach an account to this Firebase UID.</Alert>}
           {!loaded && <Alert severity="info">Loading your accounts and activity…</Alert>}
-          <div className="accounts">{data.accounts.map((account, i) =>
-            <section key={account.accountId} className={'account-card ' + (i === 0 ? 'primary-account' : 'light-account')}>
-              <div className="account-head"><span>{account.accountNumber}</span><Landmark size={19} /></div>
-              <div className="account-value">{money(account.availableMinor)}</div>
-              <div className="account-foot"><span>Available · Held {money(account.heldMinor)}</span><span>{account.accountId}</span></div>
-            </section>)}</div>
-          {data.accounts.length > 0 && <TransferForm bank={bank} accounts={data.accounts} directory={directory} send={send} />}
-          <Activity rows={data.transfers} directory={directory} />
+          <section id="accounts" className="dashboard-section">
+            <div className="section-intro"><div><span className="eyebrow">YOUR MONEY</span><h2>My accounts</h2><p>Available balances across your active accounts</p></div><span className="section-count">{data.accounts.length} {data.accounts.length === 1 ? 'ACCOUNT' : 'ACCOUNTS'}</span></div>
+            <div className="accounts">{data.accounts.map((account, i) =>
+              <section key={account.accountId} className={'account-card ' + (i === 0 ? 'primary-account' : 'light-account')}>
+                <div className="account-head"><span>{account.accountNumber}</span><Landmark size={19} /></div>
+                <div className="account-value">{money(account.availableMinor)}</div>
+                <div className="account-foot"><span>Available · Held {money(account.heldMinor)}</span><span>{account.accountId}</span></div>
+              </section>)}
+            </div>
+          </section>
+          {data.accounts.length > 0 && <div id="send-money" className="dashboard-section">
+            <div className="section-intro"><div><span className="eyebrow">MOVE MONEY</span><h2>Transfers</h2><p>Send funds within Finova or to another participating bank</p></div></div>
+            <TransferForm bank={bank} accounts={data.accounts} directory={directory} send={send} />
+          </div>}
+          <div id="activity" className="dashboard-section">
+            <div className="section-intro"><div><span className="eyebrow">YOUR RECORDS</span><h2>Recent transactions</h2><p>Track incoming and outgoing transfers</p></div></div>
+            <Activity rows={data.transfers} directory={directory} />
+          </div>
         </>}
       </main>
     </div>

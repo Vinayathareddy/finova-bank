@@ -115,3 +115,110 @@ footer span { display: inline-flex; align-items: center; gap: 6px; }
   .page-head p { font-size: 13px; }
   .page-head .MuiButton-root { font-size: 12px; }
 }
+
+
+/* Finova refreshed banking dashboard */
+:root {
+  --bg: #f4f7fb;
+  --soft: #eaf0fb;
+  --line: #e4eaf3;
+  --ink: #15233d;
+  --muted: #718096;
+  --hero: linear-gradient(125deg, #102b55 0%, #174a83 58%, #2677a5 100%);
+}
+body { background: var(--bg); }
+.layout { grid-template-columns: 248px minmax(0,1fr); background: var(--bg); }
+.sidebar { padding: 30px 18px 24px; background: #fbfcfe; border-right-color: #e8edf5; }
+.brand { margin-bottom: 42px; padding: 0 8px; }
+.brand-icon { width: 46px; height: 46px; border-radius: 14px; background: var(--hero); box-shadow: 0 8px 20px #173d6b25; }
+.brand strong { font-size: 20px; letter-spacing: .025em; }
+.brand small { letter-spacing: .16em; color: #8290a5; }
+.sidebar-caption,.eyebrow { display: block; color: #8795aa; font-size: 10px; line-height: 1.4; font-weight: 800; letter-spacing: .16em; }
+.sidebar-caption { padding: 0 12px 10px; }
+nav { gap: 7px; }
+nav button,.sidebar-nav-link,.switch-link {
+  display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 11px 13px;
+  color: #66758b; font-size: 13px; font-weight: 650; border: 0; border-radius: 10px;
+  text-decoration: none; transition: background .18s ease,color .18s ease,transform .18s ease;
+}
+nav button:hover,.sidebar-nav-link:hover,.switch-link:hover { color: #1c5b91; background: #edf3fb; transform: translateX(2px); }
+.switch-link { margin-top: auto; border: 1px solid #e4eaf3; background: #fff; }
+.topbar { min-height: 76px; padding: 0 clamp(20px,3vw,42px); background: rgba(255,255,255,.92); }
+.topbar-bank { display:flex; align-items:center; gap:11px; }
+.topbar-mark { display:grid; place-items:center; width:36px; height:36px; border-radius:11px; color:#1c5b91; background:#edf4fb; }
+.topbar-bank strong,.topbar-bank small { display:block; }
+.topbar-bank strong { color:#172b49; font-size:14px; }
+.topbar-bank small { margin-top:3px; color:#8a97a9; font-size:11px; }
+.demo.MuiChip-root { height:27px; border:1px solid #dce8f5; background:#f0f6fc; color:#32648e; font-size:10px; letter-spacing:.07em; }
+.content { max-width:1440px; padding:38px clamp(20px,3vw,42px) 38px; }
+.live-bank-content { gap:22px; }
+.page-head { margin-bottom:4px; }
+.page-head h1 { margin-top:8px; color:#152b49; font-size:clamp(29px,3vw,39px); letter-spacing:-.045em; }
+.page-head p { margin-top:8px; color:#74839a; font-size:14px; }
+.signed-in-line { display:flex; align-items:center; gap:7px; margin-top:15px; color:#7c899b; font-size:12px; }
+.signed-in-line strong { color:#334862; font-weight:700; }
+.online-dot { width:7px; height:7px; border-radius:50%; background:#26a477; box-shadow:0 0 0 3px #e1f5ed; }
+.dashboard-section { scroll-margin-top:24px; }
+.section-intro { display:flex; align-items:end; justify-content:space-between; gap:12px; margin:0 0 13px; }
+.section-intro h2 { margin-top:5px; color:#1b2d48; font-size:19px; letter-spacing:-.025em; }
+.section-intro p { margin-top:4px; color:#8190a4; font-size:12px; }
+.section-count { padding:6px 9px; border:1px solid #e3eaf3; border-radius:7px; background:#fff; color:#8190a4; font-size:9px; font-weight:800; letter-spacing:.1em; }
+.accounts { gap:16px; }
+.account-card { min-height:190px; padding:23px 25px; border-radius:17px; box-shadow:0 8px 24px #203d6110; }
+.primary-account { background:var(--hero); box-shadow:0 12px 28px #17487925; }
+.account-head { color:inherit; opacity:.9; font-size:12px; letter-spacing:.045em; }
+.account-value { font-size:clamp(30px,3.3vw,42px); letter-spacing:-.045em; }
+.account-foot { font-size:11px; opacity:.9; }
+.light-account { border:1px solid #e4eaf2; background:#fff; }
+.panel { border:1px solid #e5ebf3; border-radius:15px; box-shadow:0 7px 22px #1e3d6208; }
+.panel-head { padding:19px 22px 15px; }
+.panel-head h2 { color:#1b2d48; font-size:17px; }
+.panel-head p { color:#8794a7; font-size:12px; }
+.panel-head > svg { color:#477ca8; }
+.transfer-form { gap:16px; padding:7px 22px 23px; }
+.type-switch { padding:4px; width:max-content; max-width:100%; border:1px solid #e6edf5; border-radius:11px; background:#f6f8fb; }
+.type-switch .MuiButton-root { min-width:112px; border-radius:8px; font-size:12px; }
+.type-switch .MuiButton-contained { background:#1c5b91; }
+.type-switch .MuiButton-outlined { border-color:transparent; color:#718096; }
+.MuiTextField-root .MuiInputLabel-root { color:#74839a; font-size:13px; }
+.MuiOutlinedInput-root { border-radius:10px!important; background:#fff; font-size:13px; }
+.MuiOutlinedInput-notchedOutline { border-color:#dfe7f0!important; }
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline { border-color:#9db5ce!important; }
+.transfer-form .MuiButton-contained { min-height:43px; padding:0 19px; border-radius:9px; background:#1c5b91; font-size:13px; }
+.transfer-form .MuiButton-contained:hover { background:#154a78; }
+.live-transfer { width:100%; }
+.table-scroll { border-top:1px solid var(--line); }
+table { min-width:700px; font-size:12px; }
+th,td { padding:14px 20px; }
+th { background:#f7f9fc; color:#8794a7; font-size:10px; letter-spacing:.07em; text-transform:uppercase; }
+td { color:#43536b; }
+td strong { color:#293c56; font-weight:700; }
+td small { color:#8a97a9; font-size:10px; }
+.completed.MuiChip-root { padding-inline:3px; }
+.empty { border-top-color:#edf1f6; color:#50627a; }
+.empty p { color:#8a97a9; }
+.live-bank-layout .MuiAlert-root { border-radius:10px; font-size:12px; }
+.live-sign-in { width:min(100%,620px); }
+@media(max-width:850px) {
+  .layout { grid-template-columns:190px minmax(0,1fr); }
+  .content { padding-inline:20px; }
+}
+@media(max-width:680px) {
+  .layout { display:block; }
+  .sidebar { padding:12px; }
+  .brand { margin-bottom:12px; }
+  .sidebar-caption { display:none; }
+  nav { display:flex; gap:5px; }
+  nav button,.sidebar-nav-link,.switch-link { min-height:36px; padding:8px 9px; font-size:11px; }
+  .switch-link { margin-top:8px; }
+  .topbar { min-height:61px; padding-inline:15px; }
+  .content { padding:25px 14px 30px; }
+  .accounts { grid-template-columns:1fr; }
+  .account-card { min-height:155px; padding:18px; }
+  .page-head { margin-bottom:0; }
+  .section-intro { align-items:flex-start; }
+  .type-switch { width:100%; }
+  .type-switch .MuiButton-root { flex:1; min-width:0; }
+  .transfer-form { padding-inline:15px; }
+  .panel-head { padding-inline:15px; }
+}
